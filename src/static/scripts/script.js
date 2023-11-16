@@ -1,11 +1,17 @@
+fetch('/users/me').then(resp => resp.json()).then(data => {
+    if (data.detail !== "Unauthorized") {
+        console.log('войден')
+    }
+})
+
 const btn = document.querySelector('button')
 const login = document.querySelector('.input-login')
 const password = document.querySelector('.input-password')
 
 btn.onclick = (event) => {
-    event.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+    event.preventDefault()
 
-    const apiUrl = 'http://localhost:8000/auth/jwt/login';
+    const apiUrl = '/auth/jwt/login'
     const requestBody = new URLSearchParams({
         grant_type: '',
         username: login.value,
@@ -24,13 +30,8 @@ btn.onclick = (event) => {
             },
             body: requestBody,
         })
-        .then(response => response.json())
-        .then(data => {
-            // Обрабатываем данные ответа здесь
-            console.log(data);
-        })
+        .then(data => console.log(data))
         .catch(error => {
-            // Обрабатываем ошибки здесь
-            console.error('Error:', error);
-        });
+            console.error('Error:', error)
+        })
 };
