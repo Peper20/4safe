@@ -12,7 +12,7 @@ SECRET = 'S3V5LU11c3QtQmUtYXQtbGVhc3QtdzItYnl0ZXMtaW4tbGVuZ3RoIq'
 # }
 
 
-# config area {
+# db area {
 
 @dataclass
 class DbConfig:
@@ -43,8 +43,30 @@ def load_env():
 		),
 	)
 
-
+c = 3
 
 config = load_env()
+
+# }
+
+
+# cv area {
+
+import cv2
+import numpy as np
+
+
+PROTOTXT_FILE_NAME = 'MobileNetSSD_deploy.prototxt.txt'
+CAFFEMODEL_FILE_NAME = 'MobileNetSSD_deploy.caffemodel'
+
+CONFIDENCE = 0.1
+CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
+	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
+	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
+	"sofa", "train", "tvmonitor"]
+COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
+
+
+net = cv2.dnn.readNetFromCaffe(PROTOTXT_FILE_NAME, CAFFEMODEL_FILE_NAME)
 
 # }
