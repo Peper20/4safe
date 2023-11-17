@@ -22,3 +22,6 @@ def prepare_frame(frame):
             label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
             cv2.rectangle(frame, (startX, startY), (endX, endY), COLORS[idx], 2)
             cv2.putText(frame, label, (startX, startY), cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
+
+
+
