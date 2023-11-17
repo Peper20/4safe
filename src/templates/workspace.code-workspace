@@ -1,0 +1,12 @@
+{
+    "folders": [],
+    "settings": {
+        "python.autoComplete.extraPaths": [
+            "c:\\Users\\ученик\\.vscode\\extensions\\stefanwehr.write-your-python-program-1.0.6\\python\\src\\"
+        ],
+        "liveServer.settings.multiRootWorkspaceName": "4 save",
+        "python.analysis.extraPaths": [
+            "c:\\Users\\ученик\\.vscode\\extensions\\stefanwehr.write-your-python-program-1.0.6\\python\\src\\"
+        ]
+    }
+}

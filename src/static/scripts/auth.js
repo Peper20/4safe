@@ -1,8 +1,14 @@
-fetch('/users/me').then(resp => resp.json()).then(data => {
-    if (data.detail !== "Unauthorized") {
-        console.log('войден')
-    }
-})
+function checkAuth() {
+    fetch('users/me').then(resp => resp.json()).then(data => {
+        console.log(data)
+        if (data.detail === 'Unauthorized') {
+            console.log('Unauthorized')
+                // window.location.href = ''
+        } else console.log('authorized')
+    })
+}
+
+checkAuth()
 
 const btn = document.querySelector('button')
 const login = document.querySelector('.input-login')
@@ -22,7 +28,6 @@ btn.onclick = (event) => {
     });
 
     fetch(apiUrl, {
-            // mode: 'no-cors',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -30,8 +35,9 @@ btn.onclick = (event) => {
             },
             body: requestBody,
         })
-        .then(data => console.log(data))
-        .catch(error => {
-            console.error('Error:', error)
-        })
-};
+        .then(data => fetch('users/me').then(resp => resp.json()).then(data => {
+            if (data.email) {
+                window.location.href = ''
+            }
+        }))
+}
