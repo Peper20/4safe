@@ -41,18 +41,14 @@ async def index(request: Request):
 
 
 class Hendler:
-    def __init__(self, future, websocket) -> None:
-        self.future = future
+    def __init__(self, websocket) -> None:
         self.websocket = websocket
     
     async def __call__(self, client_websocket):
         frame_as_bytes = await client_websocket.recv()
         
-        frame = frame = cv2.imdecode(np.frombuffer(frame_as_bytes, np.uint8), cv2.IMREAD_COLOR)
+        frame = cv2.imdecode(np.frombuffer(frame_as_bytes, np.uint8), cv2.IMREAD_COLOR)
 
-        if frame is None:
-            self.future.set_result(True)
-            self.future.done()
 
         prepare_frame(frame)
 
@@ -63,13 +59,10 @@ class Hendler:
 async def get_stream(websocket: WebSocket):
     await websocket.accept()
     try:
-        future = asyncio.Future()
-        async with websockets.serve(Hendler(websocket, websocket), "localhost", 8765):
-            await asyncio.Future()  # run forever
+        async with websockets.serve(Hendler(websocket), "localhost", 8765):
+            await asyncio.Future()
 
 
 
     except (WebSocketDisconnect, ConnectionClosedError):
         print("Client disconnected")
-
-    print('AAAAAAAAAAA !!!!!!')
