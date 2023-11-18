@@ -1,15 +1,3 @@
-function checkAuth() {
-    fetch('users/me').then(resp => resp.json()).then(data => {
-        console.log(data)
-        if (data.detail === 'Unauthorized') {
-            console.log('Unauthorized')
-                // window.location.href = ''
-        } else console.log('authorized')
-    })
-}
-
-checkAuth()
-
 const btn = document.querySelector('button')
 const login = document.querySelector('.input-login')
 const password = document.querySelector('.input-password')
@@ -37,7 +25,7 @@ btn.onclick = (event) => {
         })
         .then(data => fetch('users/me').then(resp => resp.json()).then(data => {
             if (data.email) {
-                window.location.href = ''
+                // window.location.href = ''
             }
         }))
 }
